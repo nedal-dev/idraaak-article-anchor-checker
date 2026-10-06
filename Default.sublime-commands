@@ -1,0 +1,14 @@
+[
+    {
+        "caption": "Idraaak Article Anchors: Check Current File",
+        "command": "idraaak_article_anchor_check"
+    },
+    {
+        "caption": "Idraaak Article Anchors: Show Issues",
+        "command": "idraaak_article_anchor_show_issues"
+    },
+    {
+        "caption": "Idraaak Article Anchors: Clear Highlights",
+        "command": "idraaak_article_anchor_clear"
+    }
+]
