@@ -3,7 +3,7 @@
 import sublime
 import sublime_plugin
 
-from .anchor_core import check_html
+from .lib.anchor_core import check_html
 
 
 _REGIONS = "idraaak_article_anchor_issues"
