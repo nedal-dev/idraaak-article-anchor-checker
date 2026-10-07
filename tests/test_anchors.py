@@ -3,7 +3,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from anchor_core import check_html
+from lib.anchor_core import check_html
 
 
 # Expectations describe browser-visible article targets, not implementation steps.
