@@ -17,8 +17,9 @@ For manual installation:
 1. In Sublime Text, choose **Preferences > Browse Packages**.
 2. Download this repository's tagged release and extract its contents into
    a folder named **IdraaakArticleAnchorChecker** inside that Packages folder.
-3. The Python files and `Default.sublime-commands` must be directly inside
-   that folder, rather than in a second nested directory.
+3. Keep `idraaak_article_anchor_checker.py`, `Default.sublime-commands`, and
+   the `lib` folder directly inside that folder. Keep the shared parser at
+   `lib/anchor_core.py`; do not flatten the `lib` folder.
 
 Requires Sublime Text 4, build 4107 or later. No third-party Python dependencies.
 The package is free and MIT licensed; Sublime Text has its own licensing terms.
@@ -75,7 +76,9 @@ files, sends network requests, transmits content, or collects telemetry.
 
 ## Tests and maintenance
 
-Run the parser tests with Python 3.8 or later:
+GitHub Actions runs the parser tests on Python 3.8 and 3.13 and checks that
+release archives include the shared `lib` package and exclude test files.
+Run the parser tests locally with Python 3.8 or later:
 
 ```sh
 python -m unittest discover -s tests -v
