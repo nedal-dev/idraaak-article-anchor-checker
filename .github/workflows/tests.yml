@@ -1,0 +1,47 @@
+name: Parser and package tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run existing parser tests
+        run: python -m unittest discover -s tests -v
+      - name: Compile plugin and shared package
+        run: python -m compileall -q idraaak_article_anchor_checker.py lib
+      - name: Verify release archive and shared-package import
+        run: |
+          git archive --format=zip HEAD -o /tmp/anchor-checker.zip
+          python - <<'PY'
+          import sys
+          import zipfile
+
+          archive = '/tmp/anchor-checker.zip'
+          with zipfile.ZipFile(archive) as package:
+              names = set(package.namelist())
+          assert 'lib/__init__.py' in names
+          assert 'lib/anchor_core.py' in names
+          assert 'idraaak_article_anchor_checker.py' in names
+          assert 'Default.sublime-commands' in names
+          assert 'anchor_core.py' not in names
+          assert not any(name.startswith(('tests/', 'examples/', '.github/')) for name in names)
+          sys.path.insert(0, archive)
+          from lib.anchor_core import check_html
+          assert not check_html('<a href="#ok">go</a><h2 id="ok">OK</h2>').issues
+          print('Release archive layout and shared-package import passed')
+          PY
