@@ -10,7 +10,13 @@ so you can fix it yourself before publishing.
 
 ## Installation
 
-Package Control submission is pending; the package is not listed yet.
+Available through [Package Control](https://packagecontrol.io/packages/IdraaakArticleAnchorChecker).
+
+With Package Control installed:
+
+1. Open the Command Palette (`Ctrl+Shift+P`, or `Cmd+Shift+P` on macOS).
+2. Choose **Package Control: Install Package**.
+3. Search for and select **IdraaakArticleAnchorChecker**.
 
 For manual installation:
 
